@@ -1,5 +1,5 @@
 const express = require("express");
-const { connect } = require("mongoose");
+const connectDB = require("./config/db");
 const dotenv = require("dotenv").config();
 const port = 5000;
 
