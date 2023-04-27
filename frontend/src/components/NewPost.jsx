@@ -1,17 +1,27 @@
 import React , { useState } from 'react';
 import axios from "axios";
+import { useDispatch, useSelector } from 'react-redux';
+import { createPost, getPosts } from '../feature/post.slice';
 
-const NewPost = ({ userId }) => {
+const NewPost = () => {
     const [message, setMessage] = useState("")
+    const userId = useSelector((state) => state.user.userId);
+    const dispatch = useDispatch();
+
     const handleForm = (e) => {
        e.preventDefault();
 
-       axios.post("http://localhost:5000/post/", {
+       const  data =  {
         message,
         author: userId,
-       });
+       }
 
-       setMessage("")
+       axios.post("http://localhost:5000/post/", data).then(() => {
+        dispatch(createPost(data));
+        //get post car il faut aller chercher creer par la DB
+        dispatch(getPosts());
+        });
+        setMessage("")
     }
     return (
         <form className='new-post-container' onSubmit={(e) => handleForm(e)}>
