@@ -14,7 +14,7 @@ const NewPost = () => {
        const  data =  {
         message,
         author: userId,
-        _id: Date.now(), //id provisoir pour erreur console
+        _id: Date.now(), //id provisoir pour erreur console en attendant le retour de la base de donnees
        }
 
        axios.post("http://localhost:5000/post/", data).then(() => {
